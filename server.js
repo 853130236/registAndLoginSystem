@@ -52,7 +52,7 @@ app.get('/', (req, res) => {
   else {
     res.status(200)
     res.type('text/html')
-    res.render('signin.hbs')
+    res.render('hbs/signin.hbs')
   }
 })
 
@@ -92,7 +92,7 @@ app.post('/signin', async (req, res) => {
 app.get('/details', (req, res) => {
   res.status(200)
   res.type('text/html')
-  res.render('details.hbs', {'username': req.query.username, 'id': req.query.id, 'email': req.query.email, 'phone': req.query.phone, 'msg': req.session.msg})
+  res.render('hbs/details.hbs', {'username': req.query.username, 'id': req.query.id, 'email': req.query.email, 'phone': req.query.phone, 'msg': req.session.msg})
 })
 
 app.post('/details/exit', (req, res) => {
@@ -107,17 +107,17 @@ app.post('/details/exit', (req, res) => {
   res.send()
 })
 
-app.get('/regist', async (req, res) => {
+app.get('/regist', (req, res) => {
   res.status(200)
   res.type('text/html')
   req.session.password = ''
-  res.render('regist.hbs')
+  res.render('hbs/regist.hbs')
 })
 
 app.post('/regist/judge', async (req, res) => {
   res.status(200)
   res.type('application/json')
-  let result = judgeRegist.checkWhetherIsEmpty(req.body)
+  let result = judgeRegist.checkWhetherIsEmpty(req.body, req.session)
   if (!result.success) {
     res.send(result)
     return

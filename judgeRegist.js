@@ -18,7 +18,7 @@ let checkWhichFormat = (obj) => {
 }
 
 module.exports = {
-  checkWhetherIsEmpty: (obj) => {
+  checkWhetherIsEmpty: (obj, session) => {
     if (obj[checkWhichProperty(obj)] == '') {
       session[checkWhichProperty(obj) + 'Pass'] = false
       return {
