@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-Type' content='text/html;charset=utf-8'>
+    <script src='./jquery-3.2.1.min.js' type='text/javascript'></script>
+    <script src='./handlebars-v4.0.11.js' type='text/javascript'></script>
+    <link rel='stylesheet' href='./regist.css' type='text/css'/>
+    <link href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    <script src='https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <title>Regist</title>  
+</head>
+<body>
+  <div id='centerPosition'>
+    <h1>User Regist</h1>
+    <form action='#' method='post'>
+      <span class='glyphicon glyphicon-user'></span><input type='text' placeholder='input username' id='username'/><span class='glyphicon glyphicon-ok' id='usernameOk'></span><span class='glyphicon glyphicon-remove' id='usernameRemove'></span><br/>
+      <span class='glyphicon glyphicon-lock'></span><input type='password' placeholder='input password' id='password'/><span class='glyphicon glyphicon-ok' id='passwordOk'></span><span class='glyphicon glyphicon-remove' id='passwordRemove'></span><br/>
+      <span class='glyphicon glyphicon-check'></span><input type='password' placeholder='verify password' id='verify'/><span class='glyphicon glyphicon-ok' id='verifyOk'></span><span class='glyphicon glyphicon-remove' id='verifyRemove'></span><br/>
+      <span class='glyphicon glyphicon-edit'></span><input type='text' placeholder='input id' id='id'/><span class='glyphicon glyphicon-ok' id='idOk'></span><span class='glyphicon glyphicon-remove' id='idRemove'></span><br/>
+      <span class='glyphicon glyphicon-earphone'></span><input type='text' placeholder='input phone number' id='phone'/><span class='glyphicon glyphicon-ok' id='phoneOk'></span><span class='glyphicon glyphicon-remove' id='phoneRemove'></span><br/>
+      <span class='glyphicon glyphicon-envelope'></span><input type='text' placeholder='input email' id='email'/><span class='glyphicon glyphicon-ok' id='emailOk'></span><span class='glyphicon glyphicon-remove' id='emailRemove'></span><br/>
+      <input type='reset' value='Reset' id='reset' />    
+      <input type='button' value='Submit' id='submit' />
+    </form>
+    <div id='result'></div>
+  </div>
+  <script type='text/javascript'>
+    $(document).ready(function() {
+      $('.glyphicon-ok').css('visibility', 'hidden')
+      $('.glyphicon-remove').css('visibility', 'hidden')
+
+      $('input').each(function(index, item) {
+        $(this).blur(function() {
+          let property = $(this).attr('id')
+          let tempData = {}
+          tempData[property] = $(this).val()
+          $.ajax({
+            type: 'POST',
+            url: '/regist/judge',
+            data: tempData,
+            dataType: 'json', 
+            success: function (data) {
+              let ok = '#' + data.property + 'Ok'
+              console.log(ok)
+              let remove = '#' + data.property + 'Remove'
+              if (data.success) {
+                $('#result').text('')
+                $(remove).css('visibility', 'hidden')
+                $(ok).css('visibility', 'visible')
+              } else {
+                $('#result').text(data.msg)
+                $(remove).css('visibility', 'visible')
+                $(ok).css('visibility', 'hidden')
+              }
+            }
+          })
+        })
+      })
+      
+      $('#submit').click(() => {
+        $.ajax({
+          type: 'POST',
+          url: '/regist/pass',
+          data: {
+            'username': $('#username').val(),
+            'password': $('#password').val(),
+            'id':       $('#id').val(),
+            'phone':    $('#phone').val(),
+            'email':    $('#email').val() 
+          },
+          dataType: 'json', 
+          success: function (data) {
+            if (data.success) {
+              location.href = '/'
+            } else $('#result').text(data.msg)
+          }
+        })
+      }) 
+    })
+  </script>
+</body>
+</html>

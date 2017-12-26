@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv='content-Type' content='text/html;charset=utf-8'>
+    <script src='./jquery-3.2.1.min.js' type='text/javascript'></script>
+    <script src='./handlebars-v4.0.11.js' type='text/javascript'></script>
+    <link rel='stylesheet' href='./details.css' type='text/css'/>
+    <link href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css' rel='stylesheet'>
+    <script src='https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js'></script>
+    <title>Details</title>  
+</head>
+<body>
+  <div id='centerPosition'>
+    <h1>Message Of User</h1>
+    <p id='username'><span class='glyphicon glyphicon-user'></span>{{username}}</p>
+    <p id='id'><span class='glyphicon glyphicon-edit'></span>{{id}}</p>
+    <p id='phone'><span class='glyphicon glyphicon-earphone'></span>{{phone}}</p>
+    <p id='email'><span class='glyphicon glyphicon-envelope'></span>{{email}}</p>
+    <p id='msg'>{{msg}}</p>
+    <button id='layout'>Logout</button>
+  </div>
+  <script type='text/javascript'>
+    $(document).ready(() => {
+      $('#layout').click(() => {
+        $.ajax({
+          type: 'POST',
+          url: '/details/exit',
+          success: (data) => {
+            location.href = '/'
+          }
+        })
+      })   
+    })
+  </script>
+</body>
+</html>

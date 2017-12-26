@@ -1,0 +1,106 @@
+html,body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-image: url(background.jpg);
+}
+
+::-webkit-input-placeholder { 
+    color: rgb(55, 40, 16);
+}
+
+#centerPosition {
+  border: 1px solid rgb(175, 155, 126);
+  border-radius: 20px;
+  position: relative;
+  height: 250px;
+  width: 430px;
+  margin: 0 auto;
+  top: 130px;
+  box-shadow: inset 0 0 70px rgb(240, 224, 157);
+  font-family: Arial, Verdana, Sans-serif;
+}
+
+h1 {
+  text-align: center;
+}
+
+form {
+  width: 410px;
+  height: 180px;
+  margin: 0 auto;
+  position: relative;
+}
+
+input {
+  line-height: normal;
+}
+
+.glyphicon-user {
+  margin-left: 55px;
+}
+
+.glyphicon-lock {
+  margin-left: 55px;
+}
+
+#username, #password {
+  margin-left: 30px;
+  margin-top: 14px;
+  width: 250px;
+  height: 24px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(233, 219, 158);
+  box-shadow: 0 0 15px rgb(170, 146, 120);
+  outline: none;
+  opacity: 0.5;
+}
+
+#username {
+  margin-top: 5px;
+}
+
+#regist, #submit {
+  margin-top: 35px;
+  border: none;
+  border-radius: 3px;
+  background-color: rgb(202, 161, 97);
+  box-shadow: inset 0 0 15px rgb(143, 99, 38);
+  height: 22px;
+  outline: none;
+  width: 66px;
+  color: black;
+  font-weight: bold;
+  font-size: 15px;
+  transition-duration: 0.5s;
+}
+
+#regist:hover, #submit:hover {
+  opacity: 0.9;
+  transform: scale(1.05);
+}
+
+#regist {
+  margin-left: 105px;
+}
+
+#submit {
+  margin-left: 60px;
+}
+
+#result {
+  height: 25px;
+  margin: 0 auto;
+  position: relative;
+  top: -45px;
+  text-align: center;
+  font-family: Arial, Verdana, Sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+}
