@@ -53,18 +53,15 @@ router.post('/pass', async (req, res) => {
   }
 
   let keyAndValue = useCrypto.encrypt(req.body.password)
-  try {
-    await model.create({
-      'username': req.body.username,
-      'password': keyAndValue.value,
-      'key':      keyAndValue.key,
-      'id':       req.body.id,
-      'phone':    req.body.phone,    
-      'email':    req.body.email
-    })
-  } catch (err) {
-    console.log(err)
-  }
+
+  await model.create({
+    'username': req.body.username,
+    'password': keyAndValue.value,
+    'key':      keyAndValue.key,
+    'id':       req.body.id,
+    'phone':    req.body.phone,    
+    'email':    req.body.email
+  })
 
   req.session.signin = true
   req.session.username = req.body.username

@@ -41,7 +41,7 @@ router.post('/signin', async (req, res, next) => {
       result.key = docs.key
       docs = await model.findOne({'username': username, 'password': useCrypto.check(password, result.key)})
       if (docs) {
-        result.msg = '/details?username=' + username + '&id=' + docs.id + '&phone=' + docs.phone + '&email=' + docs.email
+        result.msg = '/details'
         req.session.signin = true
         req.session.username = username
       }
