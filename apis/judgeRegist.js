@@ -1,9 +1,7 @@
-const async = require('async')
-
 let checkWhichProperty = (obj) => {
   if (obj.hasOwnProperty('username')) return 'username'
+  if (obj.hasOwnProperty('verify'))   return 'verify'  
   if (obj.hasOwnProperty('password')) return 'password'
-  if (obj.hasOwnProperty('verify'))   return 'verify'
   if (obj.hasOwnProperty('id'))       return 'id'
   if (obj.hasOwnProperty('phone'))    return 'phone'
   if (obj.hasOwnProperty('email'))    return 'email'
@@ -31,8 +29,8 @@ module.exports = {
   },
   checkWhetherIsFormatbale: (obj, session) => {
     if (checkWhichProperty(obj) == 'verify') {
-      if (session.password != obj.verify) {
-        session[checkWhichProperty(obj) + 'Pass'] = false
+      if (obj.password != obj.verify) {
+        session['verifyPass'] = false
         return {
           'success': false,
           'msg': 'verify should be same with the password',
@@ -49,8 +47,6 @@ module.exports = {
         }
       }
     }
-
-    if (checkWhichProperty(obj) == 'password') session.password = obj.password
     return {'success': true, 'property': checkWhichProperty(obj)}
   },
   checkWhetherIsExist: async (obj, model, session) => {
