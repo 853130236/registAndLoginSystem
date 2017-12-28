@@ -63,6 +63,13 @@ router.post('/pass', async (req, res) => {
     'email':    req.body.email
   })
 
+  delete req.session.usernamePass
+  delete req.session.passwordPass
+  delete req.session.verifyPass
+  delete req.session.idPass
+  delete req.session.phonePass
+  delete req.session.emailPass
+
   req.session.signin = true
   req.session.username = req.body.username
   res.send({'success': true}) 

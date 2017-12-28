@@ -19,9 +19,9 @@ router.get('/', async (req, res, next) => {
 })
 
 router.post('/exit', (req, res, next) => {
-  req.session.signin = false
-  req.session.username = ''
-  req.session.msg = ''
+  delete req.session.signin 
+  delete req.session.username 
+  delete req.session.msg 
   res.status(200)
   res.send()
 })
