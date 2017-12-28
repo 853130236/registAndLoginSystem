@@ -1,6 +1,4 @@
 $(document).ready(function() {
-  $('.glyphicon-ok').css('visibility', 'hidden')
-  $('.glyphicon-remove').css('visibility', 'hidden')
 
   $('input').each(function(index, item) {
     $(this).blur(function() {

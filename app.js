@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const path = require('path')
-const hbs = require('hbs')
+const ejs = require('ejs')
 const bodyParser = require('body-parser')
 const useMongoose = require('./apis/useMongoose')
 const db = useMongoose.getDb()
@@ -18,7 +18,7 @@ app.set('views', path.join(__dirname, '/views'))
 app.use(express.static(__dirname + '/public'))
 
 app.set('view engine', 'html')
-app.engine('html', hbs.__express)
+app.engine('html', ejs.__express)
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
@@ -49,7 +49,7 @@ app.use(function(req, res, next) {
 // error handler
 app.use(function(err, req, res, next) {
   res.status(err.status || 500)
-  res.render('error.hbs', {"message": err.message, "status": err.status})
+  res.render('error.ejs', {"message": err.message, "status": err.status})
 })
 
 module.exports = app

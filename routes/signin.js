@@ -4,23 +4,12 @@ const useMongoose = require('../apis/useMongoose')
 const model = useMongoose.getModel()
 const useCrypto = require('../apis/useCrypto')
 
-
 router.get('/', (req, res, next) => {
-  if (req.session.signin) {
-    model.findOne({'username': req.session.username}, (err, docs) => {
-      if (docs) {
-        if (req.query.username != req.session.username && req.query.username) {
-          req.session.msg = 'You can just access your details!'
-          res.redirect('/details?username=' + docs.username + '&id=' + docs.id + '&phone=' + docs.phone + '&email=' + docs.email)
-        }
-        else res.redirect('/details?username=' + docs.username + '&id=' + docs.id + '&phone=' + docs.phone + '&email=' + docs.email)
-      }
-    }) 
-  }
+  if (req.session.signin) res.redirect('/details')
   else {
     res.status(200)
     res.type('text/html')
-    res.render('signin.hbs')
+    res.render('signin.ejs')
   }
 })
 

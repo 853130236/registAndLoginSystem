@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
   req.session.phonePass = false
   req.session.emailPass = false
 
-  res.render('regist.hbs')
+  res.render('regist.ejs')
 })
 
 router.post('/judge', async (req, res, next) => {
