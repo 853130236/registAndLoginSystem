@@ -5,7 +5,6 @@
   | -------------- | :---------------------- |
   | judgeRegist.js | 判断注册时输入的信息是否符合标准以及是否已存在 |
   | useCrypto.js   | 密码加密和密码验证               |
-  | useMongoose.js | 使用Mongoose              |
 
 * bin
 
@@ -21,16 +20,12 @@
   | javascripts | 存放前端javascript文件 |
   | stylese     | 存放前端css文件        |
 
-* routes
+* models(MVC模型中的M)
+  | 文件             | 作用         |
+  | -------------- | ---------- |
+  | useMongoose.js | 使用Mongoose |
 
-  | 文件         | 作用                 |
-  | ---------- | :----------------- |
-  | details.js | /details路径的路由      |
-  | regist.js  | /regist路径的路由       |
-  | signin.js  | /signin路径的路由       |
-  | error.js   | 404 Not Found路径的路由 |
-
-* views
+* views(MVC模型中的V)
 
   | 文件          | 作用              |
   | ----------- | :-------------- |
@@ -38,6 +33,15 @@
   | regist.hbs  | /regist路径的渲染模板  |
   | signin.hbs  | /signin路径的渲染模板  |
   | error.hbs   | 错误路径的渲染模板       |
+
+* routes(MVC模型中的C)
+
+  | 文件         | 作用                 |
+  | ---------- | :----------------- |
+  | details.js | /details路径的路由      |
+  | regist.js  | /regist路径的路由       |
+  | signin.js  | /signin路径的路由       |
+  | error.js   | 404 Not Found路径的路由 |
 
 * app.js: 中间件文件
 

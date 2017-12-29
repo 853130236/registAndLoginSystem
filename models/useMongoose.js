@@ -3,7 +3,7 @@ const app = express()
 const mongoose = require('mongoose')
 mongoose.Promise = global.Promise
 
-let db = mongoose.connect('mongodb://Tom:123456@ds133657.mlab.com:33657/users_infomation', {useMongoClient: true})  //  使用数据库users
+let db = mongoose.connect('mongodb://localhost:27017/users', {useMongoClient: true})  //  使用数据库users
 
 db.on('error', (error) => {
     console.log('数据库连接失败：' + error)

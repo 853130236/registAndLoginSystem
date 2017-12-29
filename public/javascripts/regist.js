@@ -1,5 +1,22 @@
-$(document).ready(function() {
+let success = (data) => {
+  let ok = '#' + data.property + 'Ok'
+  let remove = '#' + data.property + 'Remove'
+  if (data.success) {
+    $('#result').text('')
+    $(remove).css('visibility', 'hidden')
+    $(ok).css('visibility', 'visible')
+    //  处理先填写verify再填写password的情况
+    if (property == 'password' && $('#verify').val() != '') 
+      $('#verify').trigger('blur')
+  } else {
+    if ($('#result').text() == '')
+      $('#result').text(data.msg)
+    $(remove).css('visibility', 'visible')
+    $(ok).css('visibility', 'hidden')
+  }
+}
 
+$(document).ready(function() {
   $('input').each(function(index, item) {
     $(this).blur(function() {
       let property = $(this).attr('id')
@@ -14,19 +31,7 @@ $(document).ready(function() {
             'verify': $('#verify').val()
           },
           dataType: 'json', 
-          success: function (data) {
-            let ok = '#verifyOk'
-            let remove = '#verifyRemove'
-            if (data.success) {
-              $('#result').text('')
-              $(remove).css('visibility', 'hidden')
-              $(ok).css('visibility', 'visible')
-            } else {
-              $('#result').text(data.msg)
-              $(remove).css('visibility', 'visible')
-              $(ok).css('visibility', 'hidden')
-            }
-          }
+          success: success
         })
       } else {
         $.ajax({
@@ -34,19 +39,7 @@ $(document).ready(function() {
           url: '/regist/judge',
           data: tempData,
           dataType: 'json', 
-          success: function (data) {
-            let ok = '#' + data.property + 'Ok'
-            let remove = '#' + data.property + 'Remove'
-            if (data.success) {
-              $('#result').text('')
-              $(remove).css('visibility', 'hidden')
-              $(ok).css('visibility', 'visible')
-            } else {
-              $('#result').text(data.msg)
-              $(remove).css('visibility', 'visible')
-              $(ok).css('visibility', 'hidden')
-            }
-          }
+          success: success
         })
       }
     })

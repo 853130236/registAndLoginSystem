@@ -2,7 +2,7 @@ $(document).ready(() => {
   $('#submit').click(() => {
     $.ajax({
       type: 'POST',
-      url: '/signin',
+      url: '/',
       data: {
         'username': $('#username').val(), 
         'password': $('#password').val()

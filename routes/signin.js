@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router()
-const useMongoose = require('../apis/useMongoose')
+const useMongoose = require('../models/useMongoose')
 const model = useMongoose.getModel()
 const useCrypto = require('../apis/useCrypto')
 
@@ -13,7 +13,7 @@ router.get('/', (req, res, next) => {
   }
 })
 
-router.post('/signin', async (req, res, next) => {
+router.post('/', async (req, res, next) => {
   let username = req.body.username
   let password = req.body.password
   let result = {} 
@@ -42,7 +42,7 @@ router.post('/signin', async (req, res, next) => {
   } catch (err) {
     var err = new Error('查找数据库出错')
     err.status = 500
-    next(err)
+    return next(err)
   }
   
   res.status(200)

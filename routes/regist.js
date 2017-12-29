@@ -1,9 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const judgeRegist = require('../apis/judgeRegist')
-const useMongoose = require('../apis/useMongoose')
-const model = useMongoose.getModel()
 const useCrypto = require('../apis/useCrypto')
+const useMongoose = require('../models/useMongoose')
+const model = useMongoose.getModel()
 
 router.get('/', (req, res, next) => {
   res.status(200)
@@ -35,7 +35,7 @@ router.post('/judge', async (req, res, next) => {
   } catch (err) {
     var err = new Error('查找数据库出错')
     err.status = 500
-    next(err)
+    return next(err)
   }
   res.send(result)
 })
