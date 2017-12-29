@@ -11,7 +11,11 @@ router.get('/', async (req, res, next) => {
       let docs = await model.findOne({'username': req.session.username})
       res.render('details.ejs', {'username': docs.username, 'id': docs.id, 'email': docs.email, 'phone': docs.phone, 'msg': docs.msg})
       return
-    } catch (err) {}
+    } catch (err) {
+      var err = new Error('查找数据库出错')
+      err.status = 500
+      next(err)
+    }
   }
   res.render('details.ejs')
 })
@@ -21,6 +25,13 @@ router.post('/exit', (req, res, next) => {
   delete req.session.username 
   res.status(200)
   res.send()
+})
+
+router.use((err, req, res, next) => {
+  res.status(err.status || 500)
+  res.locals.message = err.message
+  res.locals.status = res.status
+  res.render('error.ejs')
 })
 
 module.exports = router

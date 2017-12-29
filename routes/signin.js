@@ -39,11 +39,22 @@ router.post('/signin', async (req, res, next) => {
         result.msg = 'The password isn\'t correct!'
       }
     }
-  } catch (err) {}
+  } catch (err) {
+    var err = new Error('查找数据库出错')
+    err.status = 500
+    next(err)
+  }
   
   res.status(200)
   res.type('application/json')
   res.send(result)
+})
+
+router.use((err, req, res, next) => {
+  res.status(err.status || 500)
+  res.locals.message = err.message
+  res.locals.status = res.status
+  res.render('error.ejs')
 })
 
 module.exports = router

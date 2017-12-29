@@ -23,11 +23,12 @@
 
 * routes
 
-  | 文件         | 作用            |
-  | ---------- | :------------ |
-  | details.js | /details路径的路由 |
-  | regist.js  | /regist路径的路由  |
-  | signin.js  | /signin路径的路由  |
+  | 文件         | 作用                 |
+  | ---------- | :----------------- |
+  | details.js | /details路径的路由      |
+  | regist.js  | /regist路径的路由       |
+  | signin.js  | /signin路径的路由       |
+  | error.js   | 404 Not Found路径的路由 |
 
 * views
 

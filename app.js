@@ -12,7 +12,7 @@ const MongoStore = require('connect-mongo')(session)
 const details = require('./routes/details')
 const regist = require('./routes/regist')
 const signin = require('./routes/signin')
-
+const error = require('./routes/error')
 
 app.set('views', path.join(__dirname, '/views'))
 app.use(express.static(__dirname + '/public'))
@@ -38,18 +38,6 @@ app.use(session({
 app.use('/', signin)
 app.use('/regist', regist)
 app.use('/details', details)
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found')
-  err.status = 404
-  next(err)
-})
-
-// error handler
-app.use(function(err, req, res, next) {
-  res.status(err.status || 500)
-  res.render('error.ejs', {"message": err.message, "status": err.status})
-})
+app.use('/', error)
 
 module.exports = app
